@@ -1,0 +1,23 @@
+﻿.Overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1200;
+}
+
+.Modal {
+  max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 24px);
+}
+.Img-Modal {
+  border-radius: 10px;
+  box-shadow: rgba(2, 2, 13, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.6) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
