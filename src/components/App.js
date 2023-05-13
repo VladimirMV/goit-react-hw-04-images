@@ -67,10 +67,8 @@ function App() {
       ) : (
         <>
           {status === 'pending' && <Loader />}
-          {status === 'pending' && items.length > 0 && (
-            <ImageGallery page={page} items={items} />
-          )}
-          {status === 'resolved' && <ImageGallery page={page} items={items} />}
+          {(status === 'resolved' || status === 'pending') &&
+            items.length > 0 && <ImageGallery page={page} items={items} />}
           {status === 'resolved' && totalHits > items.length && (
             <Button onClick={handleNextPage} />
           )}
