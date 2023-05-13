@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     async function fetchApiData() {
-      if (!inputData || page === 0) {
+      if (!inputData) {
         return;
       }
       setStatus('pending');

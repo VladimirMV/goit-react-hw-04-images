@@ -5,41 +5,39 @@ import PropTypes from 'prop-types';
 
 const ModalRoot = document.querySelector('#ModalRoot');
 
-function Modal(props) {
-const { image, onClose } = props;
+function Modal({ image, onClose }) {
+  useEffect(() => {
+    function keyDown(e) {
+      if (e.code === 'Escape') {
+        onClose();
+      }
+    }
+    window.addEventListener('keydown', keyDown);
 
-useEffect(() => {
-function keyDown(e) {
-if (e.code === 'Escape') {
-onClose();
-}
-}
-window.addEventListener('keydown', keyDown);
+    return () => {
+      window.removeEventListener('keydown', keyDown);
+    };
+  }, [onClose]);
 
-return () => {
-  window.removeEventListener('keydown', keyDown);
-};
-}, [onClose]);
+  function onOverlayClose(e) {
+    if (e.currentTarget === e.target) {
+      onClose();
+    }
+  }
 
-function onOverlayClose(e) {
-if (e.currentTarget === e.target) {
-onClose();
-}
-}
-
-return createPortal(
-<div onClick={onOverlayClose} className="Overlay">
-<div className="Modal">
-<img src={image.largeImageURL} alt="img" className="Img-Modal" />
-</div>
-</div>,
-ModalRoot
-);
+  return createPortal(
+    <div onClick={onOverlayClose} className="Overlay">
+      <div className="Modal">
+        <img src={image.largeImageURL} alt="img" className="Img-Modal" />
+      </div>
+    </div>,
+    ModalRoot
+  );
 }
 
 Modal.propTypes = {
-image: PropTypes.object,
-onClose: PropTypes.func,
+  image: PropTypes.object,
+  onClose: PropTypes.func,
 };
 
 export default Modal;
